@@ -4,15 +4,25 @@ import sys
 def rearrange(word_1, word_2, word_3, word_4):
     word_list = [word_1, word_2, word_3, word_4]
 
-    arrange = len(word_list)
+    arrange = len(word_list)-1
+    num = random.randint(0, 4)
+    # print(num)
 
     while arrange > 0:
-        for index in range(arrange-1):
-            if word_list[index] > word_list[index + 1]:
+        for i in range(arrange-1):
+            index = random.randint(0, arrange)
+            # print(index)
+            # if word_list[index] > word_list[index + 1]:
+            if index < arrange:
                 temp = word_list[index]
                 word_list[index] = word_list[index + 1]
                 word_list[index + 1] = temp
-                print(word_list[index], word_list[index + 1])
+                # print(word_list[index], word_list[index + 1])
+            else:
+                temp = word_list[index]
+                word_list[index] = word_list[index - index]
+                word_list[index - index] = temp
+                # print(word_list[index], word_list[index - index])
         arrange-=1
     print(word_list)
 
