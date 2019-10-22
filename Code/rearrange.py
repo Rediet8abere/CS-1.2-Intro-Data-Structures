@@ -4,12 +4,10 @@ import sys
 def rearrange(words):
     arrange = len(words)
     while arrange > 0:
-        for i in range(arrange):
-            index = random.randint(0, arrange)
-            if index < arrange:
-                temp = words[index]
-                words[index] = words[index - 1]
-                words[index - 1] = temp
+        index = random.randint(0, arrange-1)
+        temp = words[index]
+        words[index] = words[index - 1]
+        words[index - 1] = temp
         arrange-=1
     words = ' '.join(words)
     print(words)
