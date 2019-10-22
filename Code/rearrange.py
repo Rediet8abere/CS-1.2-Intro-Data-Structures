@@ -9,22 +9,17 @@ def rearrange(word_1, word_2, word_3, word_4):
     while arrange > 0:
         for i in range(arrange-1):
             index = random.randint(0, arrange)
-            # print(index)
-            # if word_list[index] > word_list[index + 1]:
             if index < arrange:
                 temp = word_list[index]
                 word_list[index] = word_list[index + 1]
                 word_list[index + 1] = temp
-                # print(word_list[index], word_list[index + 1])
             else:
                 temp = word_list[index]
                 word_list[index] = word_list[index - index]
                 word_list[index - index] = temp
-                # print(word_list[index], word_list[index - index])
         arrange-=1
-    print(word_list)
-
-
+    words = ' '.join(word_list)
+    print(words)
 
 if __name__ == "__main__":
     params = sys.argv[1:]
