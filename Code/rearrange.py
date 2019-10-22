@@ -5,8 +5,6 @@ def rearrange(word_1, word_2, word_3, word_4):
     word_list = [word_1, word_2, word_3, word_4]
 
     arrange = len(word_list)-1
-    num = random.randint(0, 4)
-    # print(num)
 
     while arrange > 0:
         for i in range(arrange-1):
