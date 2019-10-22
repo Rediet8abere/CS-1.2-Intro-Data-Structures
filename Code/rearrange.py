@@ -12,6 +12,21 @@ def rearrange(words):
     words = ' '.join(words)
     print(words)
 
+# find the length of the word exchange the first and last letters
+def reverse(words):
+    reverse = []
+    for index in range(len(words)):
+        word = ""
+        word_len = len(words[index]) - 1
+        for letterindex in range(len(words[index])):
+            word += words[index][word_len]
+            word_len -= 1
+        reverse.append(word)
+    print(' '.join(reverse))
+
+
+
+
 if __name__ == "__main__":
     params = sys.argv[1:]
     words = []
@@ -19,3 +34,4 @@ if __name__ == "__main__":
         word = params[index]
         words.append(word)
     rearrange(words)
+    reverse(words)
