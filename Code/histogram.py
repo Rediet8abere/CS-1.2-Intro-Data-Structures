@@ -12,8 +12,8 @@ def histogram(content):
             histogram.append([words[index], words.count(words[index])])
 
     # print(histogram)
-    unique_words(histogram)
-    frequency("Fowler", histogram)
+    # unique_words(histogram)
+    # frequency("Fowler", histogram)
 
     # list of tuples
     histogram = []
@@ -31,15 +31,23 @@ def histogram(content):
 
     # print(histogram)
 
-    # counts_list = [(1, ['one', 'two', 'red', 'blue']), (4, ['fish'])]
-    # histogram = []
-    # for index in range(len(words)):
-    #     if not any(words[index] in word_count for word_count in histogram):
-    #         if words.count(words[index])
-    #         histogram.append((words.count(words[index]), words[index]))
-    #
-    # print(histogram)
+    # list of tuples of list
+    histogram = []
+    for index in range(len(words)):
+        if not any (words.count(words[index]) in tuples for tuples in histogram):
+            word_list = []
+            word_list.append(words[index])
+            histogram.append((words.count(words[index]), word_list))
+        else:
+            for tuples in histogram:
+                count, word_list = tuples
+                if words.count(words[index]) is count and words[index] not in word_list:
+                    word_list.append(words[index])
 
+
+    print(histogram)
+
+# make it faster
 def unique_words(histogram):
     """Takes a histogram argument and returns the total count
         of unique words in the histogram. For example, when given
@@ -53,6 +61,7 @@ def unique_words(histogram):
     # print(unique_count)
     # return unique_count
 
+# make it faster
 def frequency(word, histogram):
     """Takes a word and histogram
         argument and returns the number of times that word appears
@@ -69,6 +78,6 @@ def frequency(word, histogram):
 
 
 if __name__ == "__main__":
-    file = open("Doyle.txt", "r")
+    file = open("test.txt", "r")
     content = file.read()
     histogram(content)
