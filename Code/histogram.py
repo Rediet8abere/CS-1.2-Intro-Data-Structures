@@ -1,10 +1,9 @@
 
 def histogram(content):
-    """ A histogram() function which takes a source_text argument
-        (can be either a filename or the contents of the file as a string,
-        your choice) and return a histogram data structure that stores each
-        unique word along with the number of times the word appears in the source text."""
-    print(content)
+    """ Takes a source_text contents of the file as a string and
+        return a histogram data structure that stores each unique
+        word along with the number of times the word appears in the source text."""
+    # print(content)
     words = content.split()
     # list of lists
     histogram = []
@@ -12,7 +11,8 @@ def histogram(content):
         if not any(words[index] in word_count for word_count in histogram):
             histogram.append([words[index], words.count(words[index])])
 
-    print(histogram)
+    # print(histogram)
+    unique_words(histogram)
 
     # list of tuples
     histogram = []
@@ -20,7 +20,7 @@ def histogram(content):
         if not any(words[index] in word_count for word_count in histogram):
             histogram.append((words[index], words.count(words[index])))
 
-    print(histogram)
+    # print(histogram)
 
     # Dictionary
     histogram = {}
@@ -28,9 +28,28 @@ def histogram(content):
         if not any(words[index] in word_count for word_count in histogram):
             histogram[words[index]] = words.count(words[index])
 
-    print(histogram)
+    # print(histogram)
 
-    
+    # counts_list = [(1, ['one', 'two', 'red', 'blue']), (4, ['fish'])]
+    # histogram = []
+    # for index in range(len(words)):
+    #     if not any(words[index] in word_count for word_count in histogram):
+    #         if words.count(words[index])
+    #         histogram.append((words.count(words[index]), words[index]))
+    #
+    # print(histogram)
+
+def unique_words(histogram):
+    """Takes a histogram argument and returns the total count
+        of unique words in the histogram. For example, when given
+        the histogram for The Adventures of Sherlock Holmes,
+        it returns the integer 8475."""
+    unique_count = 0
+    for list in histogram:
+        for index in range(len(list)):
+            if type(list[index]) is int and list[index]== 1:
+                unique_count+=1
+    print(unique_count)
 
 
 
