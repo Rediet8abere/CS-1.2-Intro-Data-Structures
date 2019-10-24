@@ -13,6 +13,7 @@ def histogram(content):
 
     # print(histogram)
     unique_words(histogram)
+    frequency("Fowler", histogram)
 
     # list of tuples
     histogram = []
@@ -49,11 +50,25 @@ def unique_words(histogram):
         for index in range(len(list)):
             if type(list[index]) is int and list[index]== 1:
                 unique_count+=1
-    print(unique_count)
+    # print(unique_count)
+    # return unique_count
+
+def frequency(word, histogram):
+    """Takes a word and histogram
+        argument and returns the number of times that word appears
+        in a text. For example, when given the word "mystery" and
+        the Holmes histogram, it will return the integer 20."""
+    # print(word)
+    # print(histogram)
+    for list in histogram:
+        for index in range(len(list)):
+            if type(list[index]) is str and list[index] == word:
+                print(list[index])
+                print(list[index+1])
 
 
 
 if __name__ == "__main__":
-    file = open("test.txt", "r")
+    file = open("Doyle.txt", "r")
     content = file.read()
     histogram(content)
