@@ -1,4 +1,3 @@
-# count slow
 import random
 import numpy as np
 def histogram(content):
@@ -27,8 +26,9 @@ def histogram(content):
             histogram_dic[words[index]]+= 1
     # unique_words(histogram_dic)
     # frequency("fish", histogram_dic)
+    # sampling(histogram_dic)
     words_chose = []
-    for i in range(20):
+    for i in range(10):
         words_chose.append(sampling(histogram_dic))
     print(words_chose)
 
@@ -69,36 +69,17 @@ def sampling(histogram):
      words which appear more frequently in the original text
      should be more likely to be selected by our sampling program."""
     hist_keys = list(histogram.keys())
-    total = sum(list(histogram.values()))
-    p = []
-    for value in list(histogram.values()):
-        prob_dis = value/total
-        p.append(prob_dis)
+    hist_values = list(histogram.values())
+    token = sum(list(histogram.values()))
 
-    words = []
-    dict = {}
-    for prob, word in zip(p, hist_keys):
-        dict['word'] = word
-        dict['chance'] = prob
-        words.append(dict.copy())
-    print(words)
+    rand_int = random.randint(1, 8)
 
-    rand = random.uniform(0, 1)
-    print(rand)
-    chosen_word = []
-    for i in range(len(words)):
-        word_choice=words[i]
-        if rand < word_choice['chance']:
-            chosen_word.append(word_choice['word'])
-            return word_choice['word']
-        rand-=word_choice['chance']
-    print(chosen_word)
+    for i in range(len(histogram)):
+        word_dist = hist_values[i]
+        if rand_int <= word_dist:
+            return hist_keys[i]
+        rand_int-=word_dist
 
-    # words_drawn = []
-    # for i in range(10):
-    #     draw = np.random.choice(list(histogram.keys()), 1, p=p)
-    #     words_drawn.append(draw[0])
-    # print(words_drawn)
 
 
 if __name__ == "__main__":
