@@ -1,11 +1,6 @@
 import random
 import sys
-# same
-# ranint(0, len(list)-1)
-# randrange(len(list))
 
-# write test function
-# finish up anagram
 def rearrange(words):
     """Rearranges words randomly from words list. """
     words = words.copy()

@@ -22,6 +22,7 @@ def random_words(word_num=1):
     sentence = ' '.join(random_words)
 
     print(sentence)
+    return sentence
 
 
 if __name__ == "__main__":
@@ -31,5 +32,5 @@ if __name__ == "__main__":
         word_num = params[0]
         random_words(word_num)
     else:
-        print("Put in a number in the command line")
+        print("Pass in a number in the command line")
         random_words()
