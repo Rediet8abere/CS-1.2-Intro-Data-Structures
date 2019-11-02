@@ -3,7 +3,8 @@ import sys
 
 def read_words():
     "Read words file"
-    file = open("/usr/share/dict/words")
+    # file = open("/usr/share/dict/words")
+    file = open("test.txt")
     content = file.readlines()
     file.close()
     return content
@@ -14,10 +15,11 @@ def read_words():
 def random_words(word_num=1):
     "Generate sentence constructed by random words"
     words = read_words()
+    print(words)
     print(word_num)
     random_words = []
     for i in range(int(word_num)):
-        random_index = random.randint(0, len(words))
+        random_index = random.randint(0, len(words)-1)
         random_words.append(words[random_index].strip('\n'))
     sentence = ' '.join(random_words)
 
