@@ -32,25 +32,40 @@ def  anagram(words):
     words_in =  words.copy()
     words_in = ' '.join(words_in)
 
-    # add ws to the list
-    # iterate through the words and generate a random letter and ws
-    # only generate as many words as it exists in the word
-    # concatenate it to a variable
-    # make sure all letters in the word was used
-
+    # remove space
+    # make sure to generate the same len of words
+    words_in = words_in.replace(" ", "")
+    words_in = words_in.lower()
     print(words_in)
     anagram = ""
-    while len(words_in) > 1:
-        # print("word", word)
-        letter_index = random.randrange(len(words_in))
-        anagram+=words_in[letter_index]
-        words_in = words_in.replace(words_in[letter_index], "")
+    rand_index = random.sample(range(len(words_in)), len(words_in))
+    print("rand", rand_index)
+    for rand in rand_index:
+        print(rand, words_in[rand])
+        anagram+=words_in[rand]
     print(anagram)
+    # file = open("/usr/share/dict/words")
+    file = open("test.txt", 'r')
+    content = file.readlines()
+    file.close()
+    for word in content:
+        word = word.strip('\n')
+        print(word)
+
+        # if word == anagram:
+        #     print("hello")
+        #     print(word, anagram)
+
+
+
+    # print(content)
+    # while
+
 
 
 if __name__ == "__main__":
     params = sys.argv[1:]
-    if len(params) <=1:
+    if len(params) <1:
         print("please add atleast 2 words next to file name :)")
     else:
         words = []
