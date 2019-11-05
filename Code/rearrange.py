@@ -27,9 +27,10 @@ def reverse(words):
         reverse.append(word)
     print(' '.join(reverse))
 
-def  anagram(words):
+def anagram(words):
     """shuffles the letters in a word and creates a different word with meaning."""
-    words_in =  words.copy()
+    words_in = words.copy()
+    # you can use '' instead of ' ' so you don't have to replace ' ' later
     words_in = ' '.join(words_in)
 
     # remove space
@@ -45,6 +46,7 @@ def  anagram(words):
         anagram+=words_in[rand]
     print(anagram)
     # file = open("/usr/share/dict/words")
+    # don't hard code the source_text. You can have a parameter for the source_text.
     file = open("test.txt", 'r')
     content = file.readlines()
     file.close()
@@ -65,13 +67,13 @@ def  anagram(words):
 
 if __name__ == "__main__":
     params = sys.argv[1:]
-    if len(params) <1:
+    if len(params) < 1:
         print("please add atleast 2 words next to file name :)")
     else:
         words = []
         for index in range(len(params)):
             word = params[index]
             words.append(word)
-        # rearrange(words)
-        # reverse(words)
-        anagram(words)
+        rearrange(words)
+        reverse(words)
+        # anagram(words)

@@ -6,10 +6,3 @@ red
 fish
 blue
 fish
-cat
-dog
-life
-love
-laugh
-super
-vile

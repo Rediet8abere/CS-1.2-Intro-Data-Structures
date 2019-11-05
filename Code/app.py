@@ -3,7 +3,7 @@ from dictionary_words import *
 import os
 
 app = Flask(__name__)
-
+# I think you should create a histogram with a source_text here instead of using the histogram of random_words
 @app.route('/')
 def hello_world():
     # print(random_words())
