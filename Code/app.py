@@ -2,8 +2,7 @@ from flask import Flask, render_template
 from dictionary_words import *
 import os
 # virtulal enviroment
-app = Flask(__name__, static_url_path='',
-            static_folder='templates/static')
+app = Flask(__name__)
 # I think you should create a histogram with a source_text here instead of using the histogram of random_words
 @app.route('/')
 def hello_world():

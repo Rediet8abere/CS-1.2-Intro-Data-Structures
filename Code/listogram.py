@@ -60,7 +60,7 @@ class Listogram(list):
         # TODO: Implement linear search to find index of entry with target word
         for index in range(len(self)):
             # print(index)
-            print(self[index][0])
+            # print(self[index][0])
             if self[index][0] == target:
                 return index, 0
         # return False
@@ -69,6 +69,18 @@ class Listogram(list):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
         # TODO: Randomly choose a word based on its frequency in this histogram
+        # print("self", self)
+        token = 0
+        for item in self:
+            token += item[1]
+        # print("token", token)
+        rand_int = random.randint(1, token)
+        #
+        for i in range(len(self)):
+            word_dist = self[i][1]
+            if rand_int <= word_dist:
+                return self[i][0]
+            rand_int-=word_dist
 
 
 def print_histogram(word_list):
@@ -83,6 +95,8 @@ def print_histogram(word_list):
         freq = histogram.frequency(word)
         print('{!r} occurs {} times'.format(word, freq))
     print()
+    # print("sampling", histogram.sample())
+    # print(histogram)
     print_histogram_samples(histogram)
 
 

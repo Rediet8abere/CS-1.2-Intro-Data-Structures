@@ -1,0 +1,14 @@
+.navbar {
+    height: 50px;
+}
+body {
+  background-color: black;
+}
+.card {
+  width: 1000px;
+  height: 700px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
