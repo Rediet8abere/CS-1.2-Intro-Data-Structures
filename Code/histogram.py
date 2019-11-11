@@ -1,5 +1,5 @@
 import random
-import numpy as np
+
 def histogram(content):
     """ Takes a source_text contents of the file as a string and
         return a histogram data structure that stores each unique
@@ -60,11 +60,6 @@ def frequency(word, histogram):
         in a text. For example, when given the word "fish" and
         the Holmes histogram, it will return the integer 4."""
     print(histogram)
-    # freq = histogram.get(word)
-    # if freq:
-    #     print(f"frequency of {word} is {freq}")
-    #     return freq
-    # return 0
     if histogram[word]:
         return histogram[word]
 

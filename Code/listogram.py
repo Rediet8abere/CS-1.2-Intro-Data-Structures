@@ -2,6 +2,7 @@
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import random
+import copy
 
 
 class Listogram(list):
@@ -72,6 +73,7 @@ class Listogram(list):
         # print("self", self)
         token = 0
         for item in self:
+            # print("item[1]", item[1])
             token += item[1]
         # print("token", token)
         rand_int = random.randint(1, token)
@@ -97,7 +99,9 @@ def print_histogram(word_list):
     print()
     # print("sampling", histogram.sample())
     # print(histogram)
-    print_histogram_samples(histogram)
+    # print(histogram.sample())
+    print(histogram.markov_chains())
+    # print_histogram_samples(histogram)
 
 
 def print_histogram_samples(histogram):
@@ -144,15 +148,15 @@ def main():
         print_histogram(arguments)
     else:
         # Test histogram on letters in a word
-        word = 'abracadabra'
-        print_histogram(list(word))
+        # word = 'abracadabra'
+        # print_histogram(list(word))
         # Test histogram on words in a classic book title
         fish_text = 'one fish two fish red fish blue fish'
         print_histogram(fish_text.split())
         # Test histogram on words in a long repetitive sentence
-        woodchuck_text = ('how much wood would a wood chuck chuck'
-                          ' if a wood chuck could chuck wood')
-        print_histogram(woodchuck_text.split())
+        # woodchuck_text = ('how much wood would a wood chuck chuck'
+        #                   ' if a wood chuck could chuck wood')
+        # print_histogram(woodchuck_text.split())
 
 
 if __name__ == '__main__':

@@ -2,6 +2,7 @@
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import random
+import copy
 
 
 class Dictogram(dict):
@@ -33,7 +34,6 @@ class Dictogram(dict):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
         freq = self.get(word)
-        print("freq", freq)
         if freq:
             print(f"frequency of {word} is {freq}")
             return freq
@@ -44,19 +44,21 @@ class Dictogram(dict):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
         # TODO: Randomly choose a word based on its frequency in this histogram
-        print("IN SAMPLE")
         hist_keys = list(self.keys())
         hist_values = list(self.values())
         token = sum(list(self.values()))
 
         rand_int = random.randint(1, token)
-
         for i in range(len(self)):
             word_dist = hist_values[i]
             if rand_int <= word_dist:
                 return hist_keys[i]
             rand_int-=word_dist
 
+        print()
+
+        print("histogram_chain", histogram_chain)
+        # print("self", self)
 
 def print_histogram(word_list):
     print()
@@ -72,8 +74,8 @@ def print_histogram(word_list):
         freq = histogram.frequency(word)
         print('{!r} occurs {} times'.format(word, freq))
     print()
-    print(histogram.sample())
-    # print_histogram_samples(histogram)
+    # print("sample", histogram.sample())
+    print_histogram_samples(histogram)
 
 
 def print_histogram_samples(histogram):
@@ -120,16 +122,15 @@ def main():
         print_histogram(arguments)
     else:
         # Test histogram on letters in a word
-        word = 'abracadabra'
-        print_histogram(list(word))
+        # word = 'abracadabra'
+        # print_histogram(list(word))
         # Test histogram on words in a classic book title
         fish_text = 'one fish two fish red fish blue fish'
         print_histogram(fish_text.split())
         # Test histogram on words in a long repetitive sentence
-        woodchuck_text = ('how much wood would a wood chuck chuck'
-                          ' if a wood chuck could chuck wood')
-        print_histogram(woodchuck_text.split())
-
+        # woodchuck_text = ('how much wood would a wood chuck chuck'
+        #                   ' if a wood chuck could chuck wood')
+        # print_histogram(woodchuck_text.split())
 
 if __name__ == '__main__':
     main()
