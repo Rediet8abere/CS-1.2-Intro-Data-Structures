@@ -21,15 +21,7 @@ class Listogram(list):
 
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
-        # TODO: Increase word frequency by count
         self.tokens += count
-        # print("list", self)
-        # if not any(word in word_count for word_count in self):
-        #     self[word] = count
-        #     self.types += count
-        # else:
-        #     self[word] += 1
-        # print("word", word)
         if not any(word in word_count for word_count in self):
             self.types += 1
             self.append([word, count])
@@ -41,7 +33,6 @@ class Listogram(list):
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
-        # TODO: Retrieve word frequency count
         for item in self:
             if item[0] == word:
                 return item[1]
@@ -49,7 +40,6 @@ class Listogram(list):
 
     def __contains__(self, word):
         """Return boolean indicating if given word is in this histogram."""
-        # TODO: Check if word is in this histogram
         for item in self:
             if item[0] == word:
                 return True
@@ -58,26 +48,18 @@ class Listogram(list):
     def index_of(self, target):
         """Return the index of entry containing given target word if found in
         this histogram, or None if target word is not found."""
-        # TODO: Implement linear search to find index of entry with target word
         for index in range(len(self)):
-            # print(index)
-            # print(self[index][0])
             if self[index][0] == target:
                 return index, 0
-        # return False
 
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
-        # TODO: Randomly choose a word based on its frequency in this histogram
-        # print("self", self)
         token = 0
         for item in self:
-            # print("item[1]", item[1])
             token += item[1]
-        # print("token", token)
         rand_int = random.randint(1, token)
-        #
+
         for i in range(len(self)):
             word_dist = self[i][1]
             if rand_int <= word_dist:
@@ -100,8 +82,7 @@ def print_histogram(word_list):
     # print("sampling", histogram.sample())
     # print(histogram)
     # print(histogram.sample())
-    print(histogram.markov_chains())
-    # print_histogram_samples(histogram)
+    print_histogram_samples(histogram)
 
 
 def print_histogram_samples(histogram):

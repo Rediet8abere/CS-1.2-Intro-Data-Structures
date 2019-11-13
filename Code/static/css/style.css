@@ -2,11 +2,15 @@
     height: 50px;
 }
 body {
-  background-color: black;
+  background-image:url("/static/img/drsuessday.jpg");
+  background-repeat: no-repeat;
+  background-size: 1440px 820px;
 }
 .card {
-  width: 1000px;
-  height: 700px;
+  /* width: 1000px;
+  height: 700px; */
+  margin-left: auto ;
+  margin-right: 20px ;
   position: absolute;
   left: 50%;
   top: 50%;
