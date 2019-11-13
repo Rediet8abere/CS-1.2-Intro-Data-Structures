@@ -1,5 +1,6 @@
 #!python
-
+# when we create an array object in memory it is contigious
+#  ll is not contigious
 
 class Node(object):
 
@@ -17,7 +18,7 @@ class LinkedList(object):
 
     def __init__(self, items=None):
         """Initialize this linked list and append the given items, if any."""
-        self.head = Node(items)  # First node
+        self.head = None  # First node
         self.tail = None  # Last node
         print("self", self)
         # Append given items
@@ -68,12 +69,23 @@ class LinkedList(object):
     def append(self, item):
         """Insert the given item at the tail of this linked list.
         TODO: Running time: O(1) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
+        # once we know where we are  in the list it just involves shifting the next and previous pointers around; it is
+        #  a constant time operation
+        # In an array in the worst case if we need to insert an item in the begining of the array, it will involve
+        # all of the elements to the right inorder to make a room for the item we want to insert.
+        # TODO: Create new node to  hold given item
         new_node = Node(item)
-        cur = self.head
-        while cur.next is not None:
-            cur = cur.next
-        cur.next = new_node
+        if self.head is None:
+            self.head = new_node
+            self.tail =  new_node
+            return
+        last_node = self.head
+        while last_node.next is not None:
+            last_node = last_node.next
+            self.tail =  last_node
+        last_node.next = new_node
+        self.tail = new_node
+
         # TODO: Append node after tail, if it exists
 
     def prepend(self, item):
@@ -82,7 +94,14 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
         new_node = Node(item)
+        new_node.next = self.head
         self.head = new_node
+        cur = self.head
+        if cur.next is not None:
+            return
+        else:
+            self.tail = new_node
+
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -91,16 +110,23 @@ class LinkedList(object):
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
-        if quality >= self.length():
-            # print("Oops Out of Bound")
-            return None
-        cur_index = 0
+
+        #  Arrays are constant time operation  if we give it the index it can immedialty give us the ele at
+        # which the entry is stored because arrays are contigious
+        # Accessing element in ll is in order of n operations. If we need to access an element in ll the head should
+        # treverse  the entire list before we reach the desired node
+
+        print("quality", quality)
+        q  = quality
+        print("q", q)
+        print(q('B'))
         cur = self.head
         while cur is not None:
-            if cur_index is quality:
+            if q(cur.data):
+                print("cur.data", cur.data)
                 return cur.data
             cur = cur.next
-            cur_index += 1
+
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -112,35 +138,62 @@ class LinkedList(object):
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
-        try:
-            cur = self.head
-            while True:
-                last = cur
-                cur = cur.next
-                if cur.data is item:
-                    last.next = cur.next
-                    return
-        except:
+        cur = self.head
+        if cur is not None and cur.data is item:
+            if cur.next is None:
+                self.tail = None
+            self.head = cur.next
+            cur = None
+            return item
+        prev = None
+        while cur is not None and cur.data is not item:
+            prev = cur
+            cur = cur.next
+        if cur is None:
             raise ValueError('Item not found: {}'.format(item))
+            return item
+        prev.next = cur.next
+        if cur.next is None:
+            self.tail = prev
+        cur = None
 
 def test_linked_list():
     ll = LinkedList()
-    print('list: {}'.format(ll))
-
-    print('\nTesting append:')
-    for item in ['A', 'B', 'C', 'D', 1]:
-        print('append({!r})'.format(item))
-        ll.append(item)
-        print('list: {}'.format(ll))
+    # print('list: {}'.format(ll))
+    #
+    # print('\nTesting append:')
+    # for item in ['A', 'B', 'C', 'D', 1]:
+    #     print('append({!r})'.format(item))
+    #     ll.append(item)
+    #     print('list: {}'.format(ll))
+    #
+    # ll = LinkedList(['A', 'B', 'C'])
+    # ll.head.data == 'A'  # First item
+    # ll.tail.data == 'C'  # Last item
+    # ll.delete('A')
+    # ll.head.data == 'B'  # New head
+    # ll.tail.data == 'C'  # Unchanged
+    # ll.delete('C')
+    # ll.head.data == 'B'  # Unchanged
+    # ll.tail.data == 'B'  # New tail
+    # ll.delete('B')
+    # ll.head is None  # No head
+    # ll.tail is None  # No tail
+    # # print('delete: {}'.format(ll.delete("D")))
+    # print(ll.items())
 
     print('head: {}'.format(ll.head))
     print('tail: {}'.format(ll.tail))
     print('head_node', ll.prepend("F"))
     # print('length: {}'.format(ll.length()))
-    # print('find: {}'.format(ll.find(7)))
+    print('find: {}'.format(ll.find(lambda item: item == 'B')))
     # print(ll.items())
-    # print('delete: {}'.format(ll.delete("D")))
-    # print(ll.items())
+    print(ll.items())
+    print('delete: {}'.format(ll.delete("J")))
+    print(ll.items())
+
+
+
 
     # Enable this after implementing delete methd
     delete_implemented = False
