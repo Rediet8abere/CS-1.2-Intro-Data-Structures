@@ -1,6 +1,4 @@
 #!python
-# when we create an array object in memory it is contigious
-#  ll is not contigious
 
 class Node(object):
 
@@ -56,10 +54,11 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes and count one for each
-        cur = self.head
+        TODO: Running time: O(n) we alaways need to loop through all n nodes
+        to count each item."""
+        cur = self.head  # starts counting from the head
         length = 0
+        # loop until cur is none and add one to length
         while cur is not None:
             cur = cur.next
             length += 1
@@ -68,17 +67,18 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        TODO: Running time: O(1) Why and under what conditions?"""
-        # once we know where we are  in the list it just involves shifting the next and previous pointers around; it is
-        #  a constant time operation
-        # In an array in the worst case if we need to insert an item in the begining of the array, it will involve
-        # all of the elements to the right inorder to make a room for the item we want to insert.
-        # TODO: Create new node to  hold given item
+        TODO: Running time: O(1) if the LinkedList was empty when we start
+        0(n) if LinkedList have items; we have to loop through the LinkedList
+        until we get a node where it's next item is none
+        """
+        # creating a new node
         new_node = Node(item)
+        # check if the LinkedList is empty to make the new node the head
         if self.head is None:
             self.head = new_node
             self.tail =  new_node
             return
+        # traverse through the LinkedList until the last node's next is none and append
         last_node = self.head
         while last_node.next is not None:
             last_node = last_node.next
@@ -86,17 +86,18 @@ class LinkedList(object):
         last_node.next = new_node
         self.tail = new_node
 
-        # TODO: Append node after tail, if it exists
-
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(1) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Prepend node before head, if it exists
+        TODO: Running time: O(1) we do not traverse through the
+        LinkedList; we make the node the head node"""
+        # Creates new node to hold given item
         new_node = Node(item)
+        # Point the new node to the head
         new_node.next = self.head
         self.head = new_node
         cur = self.head
+        # Check if the only ele in the LinkedList is the head_node
+        # and if it is set it to tail as well
         if cur.next is not None:
             return
         else:
@@ -105,53 +106,50 @@ class LinkedList(object):
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
-        TODO: Best case running time: O(???) Why and under what conditions?
+        TODO: Best case running time: O(1) if the item within the lambda function
+        is the head no traversing is required.
         O(n)
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find item where quality(item) is True
-        # TODO: Check if node's data satisfies given quality function
-
-        #  Arrays are constant time operation  if we give it the index it can immedialty give us the ele at
-        # which the entry is stored because arrays are contigious
-        # Accessing element in ll is in order of n operations. If we need to access an element in ll the head should
-        # treverse  the entire list before we reach the desired node
+        TODO: Worst case running time: O(n) traversing though the LinkedList is required
+        in order to look for the item within the lambda function."""
 
         print("quality", quality)
         q  = quality
-        print("q", q)
-        print(q('B'))
         cur = self.head
+        # Loop through all nodes until we find item where quality(item) is True
         while cur is not None:
             if q(cur.data):
-                print("cur.data", cur.data)
                 return cur.data
             cur = cur.next
 
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        TODO: Best case running time: O(???) Why and under what conditions?
+        TODO: Best case running time: O(1) if the item to be removed is in the head_node no need to traverse.
         O(n) removing last element
         O(1) removing first element
-        TODO: Worst case runn ing time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find one whose data matches given item
-        # TODO: Update previous node to skip around node with matching data
-        # TODO: Otherwise raise error to tell user that delete has failed
-        # Hint: raise ValueError('Item not found: {}'.format(item))
+        TODO: Worst case runn ing time: O(n) when traversing through the LinkedList is required"""
+
+        # if the only node is the head node
         cur = self.head
         if cur is not None and cur.data is item:
+            # Check if the next element in the LinkedList is none
             if cur.next is None:
                 self.tail = None
-            self.head = cur.next
-            cur = None
+            self.head = cur.next # point the header to the next which is none
+            cur = None  # delete the item by assigning it to none
             return item
+        # traverse though LinkedList until we get none
+        # or the node contains the item
         prev = None
         while cur is not None and cur.data is not item:
             prev = cur
             cur = cur.next
+        # if we don't find the item then rasies error
         if cur is None:
             raise ValueError('Item not found: {}'.format(item))
             return item
+        # if we find the item point the previous to the next next item
+        # by jumping the cur item and set the cur to none
         prev.next = cur.next
         if cur.next is None:
             self.tail = prev
@@ -159,28 +157,15 @@ class LinkedList(object):
 
 def test_linked_list():
     ll = LinkedList()
-    # print('list: {}'.format(ll))
-    #
-    # print('\nTesting append:')
-    # for item in ['A', 'B', 'C', 'D', 1]:
-    #     print('append({!r})'.format(item))
-    #     ll.append(item)
-    #     print('list: {}'.format(ll))
-    #
-    # ll = LinkedList(['A', 'B', 'C'])
-    # ll.head.data == 'A'  # First item
-    # ll.tail.data == 'C'  # Last item
-    # ll.delete('A')
-    # ll.head.data == 'B'  # New head
-    # ll.tail.data == 'C'  # Unchanged
-    # ll.delete('C')
-    # ll.head.data == 'B'  # Unchanged
-    # ll.tail.data == 'B'  # New tail
-    # ll.delete('B')
-    # ll.head is None  # No head
-    # ll.tail is None  # No tail
-    # # print('delete: {}'.format(ll.delete("D")))
-    # print(ll.items())
+    print('list: {}'.format(ll))
+
+    print('\nTesting append:')
+    for item in ['A', 'B', 'C', 'D', 1]:
+        print('append({!r})'.format(item))
+        ll.append(item)
+        print('list: {}'.format(ll))
+    # print('delete: {}'.format(ll.delete("D")))
+    print(ll.items())
 
     print('head: {}'.format(ll.head))
     print('tail: {}'.format(ll.tail))
@@ -189,14 +174,11 @@ def test_linked_list():
     print('find: {}'.format(ll.find(lambda item: item == 'B')))
     # print(ll.items())
     print(ll.items())
-    print('delete: {}'.format(ll.delete("J")))
+    # print('delete: {}'.format(ll.delete("J")))
     print(ll.items())
 
-
-
-
     # Enable this after implementing delete methd
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
         for item in ['B', 'C', 'A']:
