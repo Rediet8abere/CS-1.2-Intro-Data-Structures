@@ -8,15 +8,12 @@ def read_words():
     content = file.readlines()
     file.close()
     return content
-# lines = []
-# for line in all_lines
-#   lines.append(line.strip())
-# lines = [line.strip() for line in all_lines]
+
 def random_words(word_num=1):
     "Generate sentence constructed by random words"
     words = read_words()
-    print(words)
-    print(word_num)
+    # print(words)
+    # print(word_num)
     random_words = []
     for i in range(int(word_num)):
         random_index = random.randint(0, len(words)-1)
@@ -30,9 +27,9 @@ def random_words(word_num=1):
 if __name__ == "__main__":
     # open the file here to open it only one time
     params = sys.argv[1:]
-    if params:
+    if params is int:
         word_num = params[0]
         random_words(word_num)
     else:
-        print("Pass in a number in the command line")
+        print("Please pass in a number in the command line. A defualt word is generated.")
         random_words()

@@ -2,11 +2,9 @@ from flask import Flask, render_template
 from dictionary_words import *
 import markov
 import os
-token = 'To Sherlock Holmes she is always _the_ woman. I have seldom heard him mention her under any other name. In his eyes she eclipses and predominates the whole of her sex. It was not that he felt any emotion akin to love for Irene Adler. All emotions, and that one particularly, were abhorrent to his cold, precise, but admirably balanced mind. He was, I take it, the most perfect reasoning and observing machine that the world has seen; but, as a lover, he would have placed himself in a false position.'
+token = 'TOM and JERRY traversed the Gardens, and enjoyed themselves to the utmost extent in all the variety they afforded, till day-light had long given them the hint it was time to think of home. LOGIC, as upon former occasions, was not to be found; and the CORINTHIAN and his COZ were compelled to leave Vauxhall without him.'
 token = list(token.split())
-# virtulal enviroment
 app = Flask(__name__)
-# I think you should create a histogram with a source_text here instead of using the histogram of random_words
 @app.route('/')
 def tweet():
     # print(random_words())

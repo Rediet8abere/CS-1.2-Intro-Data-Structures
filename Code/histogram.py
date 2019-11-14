@@ -24,13 +24,13 @@ def histogram(content):
             histogram_dic[words[index]] = 1
         else:
             histogram_dic[words[index]]+= 1
-    # unique_words(histogram_dic)
-    print("pritting frequency", frequency("f", histogram_dic))
+    print("unique words", unique_words(histogram_dic))
+    print(" frequency", frequency("f", histogram_dic))
     # sampling(histogram_dic)
-    # words_chose = []
-    # for i in range(10):
-    #     words_chose.append(sampling(histogram_dic))
-    # print(words_chose)
+    words_chose = []
+    for i in range(10):
+        words_chose.append(sampling(histogram_dic))
+    print(words_chose)
 
     # list of count
     histogram_count = []
@@ -60,8 +60,10 @@ def frequency(word, histogram):
         in a text. For example, when given the word "fish" and
         the Holmes histogram, it will return the integer 4."""
     print(histogram)
-    if histogram[word]:
+    if word in histogram.keys():
         return histogram[word]
+    else:
+        print("Key not found")
 
 def sampling(histogram):
     """The first weighting we'll apply is a frequency weighting:
