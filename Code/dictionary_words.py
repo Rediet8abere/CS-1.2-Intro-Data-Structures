@@ -3,8 +3,8 @@ import sys
 
 def read_words():
     "Read words file"
-    # file = open("/usr/share/dict/words")
-    file = open("test.txt")
+    file = open("/usr/share/dict/words")
+    # file = open("test.txt")
     content = file.readlines()
     file.close()
     return content
@@ -25,9 +25,9 @@ def random_words(word_num=1):
 
 
 if __name__ == "__main__":
-    # open the file here to open it only one time
+    # open the file here.
     params = sys.argv[1:]
-    if params is int:
+    if params:
         word_num = params[0]
         random_words(word_num)
     else:
