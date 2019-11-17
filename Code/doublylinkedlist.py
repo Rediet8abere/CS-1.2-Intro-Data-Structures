@@ -38,6 +38,40 @@ class Doublylinkedlist(object):
             self.head.prev = None
             cur_node.prev = self.head
 
+    def append_after(self, data, after_data):
+        new_node = Node(data)
+        cur_node = self.head
+        if cur_node.next is None and cur_node.data == after_data:
+            cur_node.next = new_node
+            new_node.prev = cur_node
+        else:
+            before = None
+            while cur_node.data != after_data:
+                cur_node = cur_node.next
+                before = cur_node.next
+            new_node.prev = cur_node
+            new_node.next = before
+            cur_node.next = new_node
+            before.prev = new_node
+
+    def append_before(self, data, before_data):
+        new_node = Node(data)
+        cur_node = self.head
+        if cur_node.next is None and cur_node.data == before_data:
+            self.head = new_node
+            new_node.next = cur_node
+            cur_node.prev = new_node
+
+        else:
+            after = None
+            while cur_node.data != before_data:
+                cur_node = cur_node.next
+                after = cur_node.prev
+            cur_node.prev = new_node
+            new_node.next = cur_node
+            new_node.prev = after
+            after.next = new_node
+
     def items(self):
         cur_node = self.head
         while cur_node is not None:
@@ -55,5 +89,9 @@ dll.append(4)
 
 dll.prepend(5)
 dll.prepend(-1)
+
+dll.append_after(6, 2)
+
+dll.append_before(7, 3)
 
 dll.items()
