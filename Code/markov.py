@@ -11,6 +11,8 @@ def markov_chains(token):
     word_list = []
     # creates a Dictionary of list
     for index in range(len(token)-1):
+        # loop through the list to check if the
+        print(token)
         if not any(token[index] in word_count for word_count in word_dict):
             word_list.append(token[index+1])
             word_dict[token[index]] = word_list
