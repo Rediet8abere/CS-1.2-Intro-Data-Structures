@@ -79,9 +79,30 @@ class LinkedList(object):
         self.tail.next = new_node
         self.tail = self.tail.next
 
+    def append_after(self, sub, after_node):
+        """ Insert a given item after a specific node
+            Running time: O(n) we have to find the specified node
+            before appending
+        """
+        new_node = Node(sub)
+        cur_node = self.head
+        # if the only item is the head
+        if cur_node.next is None and cur_node.data == after_node:
+            cur_node.next = new_node
+        else:
+            # look for the node we should append next to
+            # the nodes after the current node will be kept
+            following = cur_node.next
+            while cur_node != after_node:
+                cur_node = cur_node.next
+                following = cur_node.next
+            cur_node.next = new_node
+            new_node.next = following
+
+
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(1) we do not traverse through the
+        Running time: O(1) we do not traverse through the
         LinkedList; we make the node the head node"""
         # counting the data
         self.count += 1
@@ -133,7 +154,7 @@ class LinkedList(object):
                 self.tail = None
             self.head = cur.next # point the header to the next which is none
             cur = None  # delete the item by assigning it to none
-            return item
+            return cur
         # traverse though LinkedList until we get none
         # or the node contains the item
         prev = None
@@ -150,36 +171,43 @@ class LinkedList(object):
         if cur.next is None:
             self.tail = prev
         cur = None
+        return prev
 
     def replace(self, item, sub):
         """add a new replace method to your LinkedList class that deletes an
            existing item and replaces it with a new item, without creating a new node."""
-        self.delete(item)
+        after_node = self.delete(item)
+        self.append_after(sub, after_node)
 
 def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
 
-    print('\nTesting append:')
-    for item in ['A', 'B', 'C', 'D', 1]:
-        print('append({!r})'.format(item))
-        ll.append(item)
-        print('list: {}'.format(ll))
-    # print('delete: {}'.format(ll.delete("D")))
-    print(ll.items())
-
-    print('head: {}'.format(ll.head))
-    print('tail: {}'.format(ll.tail))
-    print('head_node', ll.prepend("F"))
-    # print('length: {}'.format(ll.length()))
-    print('find: {}'.format(ll.find(lambda item: item == 'B')))
+    # print('\nTesting append:')
+    # for item in ['A', 'B', 'C', 'D', 1]:
+    #     print('append({!r})'.format(item))
+    #     ll.append(item)
+    #     print('list: {}'.format(ll))
+    # # print('delete: {}'.format(ll.delete("D")))
     # print(ll.items())
+
+    # print('head: {}'.format(ll.head))
+    # print('tail: {}'.format(ll.tail))
+    # print('head_node', ll.prepend("F"))
+    # # print('length: {}'.format(ll.length()))
+    # print('find: {}'.format(ll.find(lambda item: item == 'B')))
+    # print(ll.items())
+    ll.append("k")
+    ll.append("A")
+    ll.append("B")
+    ll.append("C")
     print(ll.items())
     # print('delete: {}'.format(ll.delete("J")))
+    ll.replace("A", 2)
     print(ll.items())
 
     # Enable this after implementing delete methd
-    delete_implemented = True
+    delete_implemented = False
     if delete_implemented:
         print('\nTesting delete:')
         for item in ['B', 'C', 'A']:
