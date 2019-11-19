@@ -5,11 +5,12 @@ class Node(object):
         self.next = None
         self.prev = None
 
-class Doublylinkedlist(object):
+class DoublyLinkedList(object):
 
-    def __init__(self):
-        self.head = None
-        self.tail = None
+    def __init__(self, items=None):
+        """Initialize this linked list and append the given items, if any."""
+        self.head = None  # First node
+        self.tail = None  # Last node
 
     def append(self, data):
         new_node = Node(data)
@@ -78,7 +79,7 @@ class Doublylinkedlist(object):
             print(cur_node.data)
             cur_node = cur_node.next
 
-dll = Doublylinkedlist()
+dll = DoublyLinkedList()
 
 dll.prepend(0)
 

@@ -11,8 +11,10 @@ def markov_chains(token):
     word_list = []
     # creates a Dictionary of list
     for index in range(len(token)-1):
-        # loop through the list to check if the
-        print(token)
+        # loop through the list to check if token is in dict appends it to the list
+        # and create a Dictionary of list as the value and token as a key
+        # if not look for the key, get the value of the key which is a list and
+        # append the token to the list
         if not any(token[index] in word_count for word_count in word_dict):
             word_list.append(token[index+1])
             word_dict[token[index]] = word_list
@@ -21,11 +23,15 @@ def markov_chains(token):
                 value = word_dict.get(token[index])
                 value.append(token[index+1])
         word_list = []
-    # calls dictogram on the list inside the Dictionary to change it to a Dictionary
+
     capital_words = []
     ending_words = []
     for key, value in word_dict.items():
+        # calls dictogram on the list(value) inside
+        # the Dictionary to change it to a Dictionary
         word_dict[key] = dictogram.Dictogram(value)
+        # sets capital words as the start word
+        # sets words that ends with ., !, ? as ending words 
         for letter in key:
             if letter.isupper():
                 capital_words.append(key)

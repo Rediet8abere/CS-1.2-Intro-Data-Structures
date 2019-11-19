@@ -31,7 +31,6 @@ def histogram(content):
     for i in range(10):
         words_chose.append(sampling(histogram_dic))
     print(words_chose)
-
     # list of count
     histogram_count = []
     for index in range(len(words)):
@@ -44,6 +43,7 @@ def histogram(content):
                 count, word_list = tuples
                 if words.count(words[index]) is count and words[index] not in word_list:
                     word_list.append(words[index])
+    return histogram_dic
 
 def unique_words(histogram):
     """Takes a histogram argument and returns the total count
@@ -81,9 +81,16 @@ def sampling(histogram):
             return hist_keys[i]
         rand_int-=word_dist
 
+#
+def test_sampling():
+    histogram_dic = {'one': 1, 'fish': 4, 'two': 1, 'red': 1, 'blue': 1}
+    words_chosen = []
+    for i in range(10):
+        words_chose.append(sampling(histogram_dic))
+    for word in words_chosen:
 
 
 if __name__ == "__main__":
     file = open("test.txt", "r")
     content = file.read()
-    histogram(content)
+    print("histogram in main", histogram(content))

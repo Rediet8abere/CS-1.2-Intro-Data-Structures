@@ -18,6 +18,7 @@ class LinkedList(object):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node
+        self.count = 0
         print("self", self)
         # Append given items
         if items is not None:
@@ -56,13 +57,13 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(n) we alaways need to loop through all n nodes
         to count each item."""
-        cur = self.head  # starts counting from the head
-        length = 0
-        # loop until cur is none and add one to length
-        while cur is not None:
-            cur = cur.next
-            length += 1
-        return length
+        # cur = self.head  # starts counting from the head
+        # length = 0
+        # # loop until cur is none and add one to length
+        # while cur is not None:
+        #     cur = cur.next
+        #     length += 1
+        return self.count
 
 
     def append(self, item):
@@ -71,6 +72,8 @@ class LinkedList(object):
         0(n) if LinkedList have items; we have to loop through the LinkedList
         until we get a node where it's next item is none
         """
+        # counting the data
+        self.count += 1
         # creating a new node
         new_node = Node(item)
         # check if the LinkedList is empty to make the new node the head
@@ -90,6 +93,8 @@ class LinkedList(object):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(1) we do not traverse through the
         LinkedList; we make the node the head node"""
+        # counting the data
+        self.count += 1
         # Creates new node to hold given item
         new_node = Node(item)
         # Point the new node to the head
@@ -128,7 +133,8 @@ class LinkedList(object):
         O(n) removing last element
         O(1) removing first element
         TODO: Worst case runn ing time: O(n) when traversing through the LinkedList is required"""
-
+        # decreasing count by one when we are deleting an item
+        self.count -= 1
         # if the only node is the head node
         cur = self.head
         if cur is not None and cur.data is item:
@@ -154,6 +160,11 @@ class LinkedList(object):
         if cur.next is None:
             self.tail = prev
         cur = None
+
+    def replace(self, item, sub):
+        """add a new replace method to your LinkedList class that deletes an
+           existing item and replaces it with a new item, without creating a new node."""
+        self.delete(item)
 
 def test_linked_list():
     ll = LinkedList()
