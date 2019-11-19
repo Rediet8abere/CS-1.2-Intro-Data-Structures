@@ -57,12 +57,6 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(n) we alaways need to loop through all n nodes
         to count each item."""
-        # cur = self.head  # starts counting from the head
-        # length = 0
-        # # loop until cur is none and add one to length
-        # while cur is not None:
-        #     cur = cur.next
-        #     length += 1
         return self.count
 
 
@@ -81,13 +75,9 @@ class LinkedList(object):
             self.head = new_node
             self.tail =  new_node
             return
-        # traverse through the LinkedList until the last node's next is none and append
-        last_node = self.head
-        while last_node.next is not None:
-            last_node = last_node.next
-            self.tail =  last_node
-        last_node.next = new_node
-        self.tail = new_node
+        # appending item to the tail
+        self.tail.next = new_node
+        self.tail = self.tail.next
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
