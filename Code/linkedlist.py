@@ -87,15 +87,18 @@ class LinkedList(object):
         new_node = Node(sub)
         cur_node = self.head
         # if the only item is the head
-        if cur_node.next is None and cur_node.data == after_node:
-            cur_node.next = new_node
+        if cur_node is None and cur_node == after_node:
+            cur_node = new_node
+            return
         else:
             # look for the node we should append next to
             # the nodes after the current node will be kept
             following = cur_node.next
             while cur_node != after_node:
                 cur_node = cur_node.next
-                following = cur_node.next
+                following = cur_node
+            print("cur_node", cur_node)
+            print("cur_node.next", cur_node.next)
             cur_node.next = new_node
             new_node.next = following
 
@@ -146,19 +149,31 @@ class LinkedList(object):
         TODO: Worst case runn ing time: O(n) when traversing through the LinkedList is required"""
         # decreasing count by one when we are deleting an item
         self.count -= 1
+        print(self.items(), "In delete")
+        print("item", item)
         # if the only node is the head node
         cur = self.head
-        if cur is not None and cur.data is item:
+        print("cur", cur)
+        print("cur.data, item: ", cur.data, item)
+        print("cur is not None", cur is not None)
+        print(type(cur.data), type(item))
+        cur_data = cur.data
+        print("cur_data is item", cur_data, item, cur_data is item)
+        if cur is not None and cur.data == item:
+            print("Hello J")
             # Check if the next element in the LinkedList is none
             if cur.next is None:
+                print("Hello World")
                 self.tail = None
+            print("Hello Earth")
             self.head = cur.next # point the header to the next which is none
             cur = None  # delete the item by assigning it to none
-            return cur
+            return
         # traverse though LinkedList until we get none
         # or the node contains the item
         prev = None
         while cur is not None and cur.data is not item:
+            print("Hello Mars")
             prev = cur
             cur = cur.next
         # if we don't find the item then rasies error
@@ -176,7 +191,10 @@ class LinkedList(object):
     def replace(self, item, sub):
         """add a new replace method to your LinkedList class that deletes an
            existing item and replaces it with a new item, without creating a new node."""
+        # self.delete(item)
         after_node = self.delete(item)
+        if item == self.head:
+            self.prepend(sub)
         self.append_after(sub, after_node)
 
 def test_linked_list():
@@ -197,13 +215,14 @@ def test_linked_list():
     # # print('length: {}'.format(ll.length()))
     # print('find: {}'.format(ll.find(lambda item: item == 'B')))
     # print(ll.items())
-    ll.append("k")
+    ll.append("J")
     ll.append("A")
     ll.append("B")
     ll.append("C")
     print(ll.items())
+
     # print('delete: {}'.format(ll.delete("J")))
-    ll.replace("A", 2)
+    ll.replace("J ", 2)
     print(ll.items())
 
     # Enable this after implementing delete methd
