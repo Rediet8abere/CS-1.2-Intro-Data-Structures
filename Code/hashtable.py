@@ -30,9 +30,7 @@ class HashTable(object):
         # Collect all keys in each bucket
         all_keys = []
         for bucket in self.buckets:
-            print("bucket", bucket)
             for key, value in bucket.items():
-                print("key, value", key, value)
                 all_keys.append(key)
         return all_keys
 
@@ -42,12 +40,8 @@ class HashTable(object):
         # Loop through all buckets
         # Collect all values in each bucket
         all_values = []
-        print("self.buckets", self.buckets)
         for bucket in self.buckets:
-            print("bucket", bucket)
             for key, value in bucket.items():
-                print("Hello World")
-                print("key, value", key, value)
                 all_values.append(value)
         return all_values
 
@@ -120,7 +114,6 @@ class HashTable(object):
         # If found, delete entry associated with given key
         # Otherwise, raise error to tell user delete failed
         # raise KeyError('Key not found: {}'.format(key))
-        print("self", self)
         for bucket in self.buckets:
             for key_bucket, value in bucket.items():
                 if key_bucket == key and value:

@@ -19,7 +19,6 @@ class LinkedList(object):
         self.head = None  # First node
         self.tail = None  # Last node
         self.count = 0
-        print("self", self)
         # Append given items
         if items is not None:
             for item in items:
@@ -148,12 +147,8 @@ class LinkedList(object):
         TODO: Worst case runn ing time: O(n) when traversing through the LinkedList is required"""
         # decreasing count by one when we are deleting an item
         self.count -= 1
-        print(self.items(), "In delete")
-        print("item", item)
         # if the only node is the head node
         cur = self.head
-        print("self.head", self.head)
-        cur_data = cur.data
 
         if cur is not None and cur.data == item:
             # print("cur", cur, "cur.data", cur.data)
@@ -165,12 +160,8 @@ class LinkedList(object):
             return
         # traverse though LinkedList until we get none
         # or the node contains the item
-        print("it gets before while")
         prev = None
         while cur is not None and cur.data != item:
-            print("cur.data is not item: ", cur.data is not item)
-            print("cur", cur, "cur.data", cur.data)
-            print("item", item, "cur.data", cur.data)
             prev = cur
             cur = cur.next
         # if we don't find the item then rasies error
