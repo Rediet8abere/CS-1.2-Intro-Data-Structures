@@ -131,7 +131,6 @@ class LinkedList(object):
         TODO: Worst case running time: O(n) traversing though the LinkedList is required
         in order to look for the item within the lambda function."""
 
-        print("quality", quality)
         q  = quality
         cur = self.head
         # Loop through all nodes until we find item where quality(item) is True
@@ -153,27 +152,25 @@ class LinkedList(object):
         print("item", item)
         # if the only node is the head node
         cur = self.head
-        print("cur", cur)
-        print("cur.data, item: ", cur.data, item)
-        print("cur is not None", cur is not None)
-        print(type(cur.data), type(item))
+        print("self.head", self.head)
         cur_data = cur.data
-        print("cur_data is item", cur_data, item, cur_data is item)
+
         if cur is not None and cur.data == item:
-            print("Hello J")
+            # print("cur", cur, "cur.data", cur.data)
             # Check if the next element in the LinkedList is none
             if cur.next is None:
-                print("Hello World")
                 self.tail = None
-            print("Hello Earth")
             self.head = cur.next # point the header to the next which is none
             cur = None  # delete the item by assigning it to none
             return
         # traverse though LinkedList until we get none
         # or the node contains the item
+        print("it gets before while")
         prev = None
-        while cur is not None and cur.data is not item:
-            print("Hello Mars")
+        while cur is not None and cur.data != item:
+            print("cur.data is not item: ", cur.data is not item)
+            print("cur", cur, "cur.data", cur.data)
+            print("item", item, "cur.data", cur.data)
             prev = cur
             cur = cur.next
         # if we don't find the item then rasies error
@@ -201,32 +198,32 @@ def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
 
-    # print('\nTesting append:')
-    # for item in ['A', 'B', 'C', 'D', 1]:
-    #     print('append({!r})'.format(item))
-    #     ll.append(item)
-    #     print('list: {}'.format(ll))
-    # # print('delete: {}'.format(ll.delete("D")))
-    # print(ll.items())
-
-    # print('head: {}'.format(ll.head))
-    # print('tail: {}'.format(ll.tail))
-    # print('head_node', ll.prepend("F"))
-    # # print('length: {}'.format(ll.length()))
-    # print('find: {}'.format(ll.find(lambda item: item == 'B')))
-    # print(ll.items())
-    ll.append("J")
-    ll.append("A")
-    ll.append("B")
-    ll.append("C")
+    print('\nTesting append:')
+    for item in ['A', 'B', 'C', 'D', 1]:
+        print('append({!r})'.format(item))
+        ll.append(item)
+        print('list: {}'.format(ll))
+    # print('delete: {}'.format(ll.delete("D")))
     print(ll.items())
+
+    print('head: {}'.format(ll.head))
+    print('tail: {}'.format(ll.tail))
+    print('head_node', ll.prepend("F"))
+    # print('length: {}'.format(ll.length()))
+    print('find: {}'.format(ll.find(lambda item: item == 'B')))
+    # print(ll.items())
+    # ll.append("J")
+    # ll.append("A")
+    # ll.append("B")
+    # ll.append("C")
+    # print(ll.items())
 
     # print('delete: {}'.format(ll.delete("J")))
-    ll.replace("J ", 2)
-    print(ll.items())
+    # ll.replace("J ", 2)
+    # print(ll.items())
 
     # Enable this after implementing delete methd
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
         for item in ['B', 'C', 'A']:
