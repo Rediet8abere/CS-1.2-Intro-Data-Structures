@@ -7,7 +7,7 @@ class Node(object):
 
 class DoublyLinkedList(object):
 
-    def __init__(self, items=None):
+    def __init__(self):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node

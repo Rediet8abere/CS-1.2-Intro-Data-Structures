@@ -1,8 +1,8 @@
 import dictogram
 import random
 # token = 'one fish two fish red fish blue fish'
-source_text = '“Seven!” I answered. “Then, how do you know?”'
-source_text = list(source_text.split())
+# source_text = '“Seven!” I answered. “Then, how do you know?”'
+# source_text = list(source_text.split())
 def markov_chains(token):
     """ Takes a token as an argument and creates a markov chain
         to generate a sentence.
@@ -31,7 +31,7 @@ def markov_chains(token):
         # the Dictionary to change it to a Dictionary
         word_dict[key] = dictogram.Dictogram(value)
         # sets capital words as the start word
-        # sets words that ends with ., !, ? as ending words 
+        # sets words that ends with ., !, ? as ending words
         for letter in key:
             if letter.isupper():
                 capital_words.append(key)
@@ -61,4 +61,4 @@ def markov_chains(token):
     print(sentence)
     return sentence
 if __name__ == '__main__':
-    sentence = markov_chains(source_text)
+    markov_chains(token)

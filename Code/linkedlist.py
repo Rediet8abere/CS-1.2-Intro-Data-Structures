@@ -149,9 +149,12 @@ class LinkedList(object):
         self.count -= 1
         # if the only node is the head node
         cur = self.head
-
+        # print("cur", cur, "cur.data", cur.data)
+        # print("cur.data", cur.data, "item", item)
+        # print("cur.data == item", cur.data == item)
         if cur is not None and cur.data == item:
             # print("cur", cur, "cur.data", cur.data)
+            # print("cur.data", cur.data, "item", item)
             # Check if the next element in the LinkedList is none
             if cur.next is None:
                 self.tail = None
@@ -189,29 +192,29 @@ def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
 
-    print('\nTesting append:')
-    for item in ['A', 'B', 'C', 'D', 1]:
-        print('append({!r})'.format(item))
-        ll.append(item)
-        print('list: {}'.format(ll))
-    # print('delete: {}'.format(ll.delete("D")))
+    # print('\nTesting append:')
+    # for item in ['A', 'B', 'C', 'D', 1]:
+    #     print('append({!r})'.format(item))
+    #     ll.append(item)
+    #     print('list: {}'.format(ll))
+    # # print('delete: {}'.format(ll.delete("D")))
+    # print(ll.items())
+    #
+    # print('head: {}'.format(ll.head))
+    # print('tail: {}'.format(ll.tail))
+    # print('head_node', ll.prepend("F"))
+    # # print('length: {}'.format(ll.length()))
+    # print('find: {}'.format(ll.find(lambda item: item == 'B')))
+    # print(ll.items())
+    ll.append("J")
+    ll.append("A")
+    ll.append("B")
+    ll.append("C")
     print(ll.items())
 
-    print('head: {}'.format(ll.head))
-    print('tail: {}'.format(ll.tail))
-    print('head_node', ll.prepend("F"))
-    # print('length: {}'.format(ll.length()))
-    print('find: {}'.format(ll.find(lambda item: item == 'B')))
-    # print(ll.items())
-    # ll.append("J")
-    # ll.append("A")
-    # ll.append("B")
-    # ll.append("C")
-    # print(ll.items())
-
     # print('delete: {}'.format(ll.delete("J")))
-    # ll.replace("J ", 2)
-    # print(ll.items())
+    ll.replace("J ", 2)
+    print(ll.items())
 
     # Enable this after implementing delete methd
     delete_implemented = True
