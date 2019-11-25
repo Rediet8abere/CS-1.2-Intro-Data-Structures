@@ -5,6 +5,8 @@ import cleanup
 
 
 class Markov(object):
+    """ Generates sentence based on word distribution
+    """
     def __init__(self):
         self.text = cleanup.clean_text()
         self.token = words_list.token(self.text)

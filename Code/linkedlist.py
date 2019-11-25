@@ -78,30 +78,6 @@ class LinkedList(object):
         self.tail.next = new_node
         self.tail = self.tail.next
 
-    def append_after(self, sub, after_node):
-        """ Insert a given item after a specific node
-            Running time: O(n) we have to find the specified node
-            before appending
-        """
-        new_node = Node(sub)
-        cur_node = self.head
-        # if the only item is the head
-        if cur_node is None and cur_node == after_node:
-            cur_node = new_node
-            return
-        else:
-            # look for the node we should append next to
-            # the nodes after the current node will be kept
-            following = cur_node.next
-            while cur_node != after_node:
-                cur_node = cur_node.next
-                following = cur_node
-            print("cur_node", cur_node)
-            print("cur_node.next", cur_node.next)
-            cur_node.next = new_node
-            new_node.next = following
-
-
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         Running time: O(1) we do not traverse through the
@@ -149,12 +125,7 @@ class LinkedList(object):
         self.count -= 1
         # if the only node is the head node
         cur = self.head
-        # print("cur", cur, "cur.data", cur.data)
-        # print("cur.data", cur.data, "item", item)
-        # print("cur.data == item", cur.data == item)
         if cur is not None and cur.data == item:
-            # print("cur", cur, "cur.data", cur.data)
-            # print("cur.data", cur.data, "item", item)
             # Check if the next element in the LinkedList is none
             if cur.next is None:
                 self.tail = None
@@ -180,41 +151,42 @@ class LinkedList(object):
         return prev
 
     def replace(self, item, sub):
-        """add a new replace method to your LinkedList class that deletes an
-           existing item and replaces it with a new item, without creating a new node."""
-        # self.delete(item)
-        after_node = self.delete(item)
-        if item == self.head:
-            self.prepend(sub)
-        self.append_after(sub, after_node)
+        """Add a new replace method to your LinkedList class that deletes an
+        existing item and replaces it with a new item, without creating a new node."""
+        cur_node = self.head
+        while cur_node.data != item:
+            print(cur_node.data)
+            cur_node = cur_node.next
+        cur_node.data = sub
+
 
 def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
 
-    # print('\nTesting append:')
-    # for item in ['A', 'B', 'C', 'D', 1]:
-    #     print('append({!r})'.format(item))
-    #     ll.append(item)
-    #     print('list: {}'.format(ll))
-    # # print('delete: {}'.format(ll.delete("D")))
-    # print(ll.items())
-    #
-    # print('head: {}'.format(ll.head))
-    # print('tail: {}'.format(ll.tail))
-    # print('head_node', ll.prepend("F"))
-    # # print('length: {}'.format(ll.length()))
-    # print('find: {}'.format(ll.find(lambda item: item == 'B')))
-    # print(ll.items())
-    ll.append("J")
-    ll.append("A")
-    ll.append("B")
-    ll.append("C")
+    print('\nTesting append:')
+    for item in ['A', 'B', 'C', 'D', 1]:
+        print('append({!r})'.format(item))
+        ll.append(item)
+        print('list: {}'.format(ll))
+    # print('delete: {}'.format(ll.delete("D")))
     print(ll.items())
 
-    # print('delete: {}'.format(ll.delete("J")))
-    ll.replace("J ", 2)
-    print(ll.items())
+    print('head: {}'.format(ll.head))
+    print('tail: {}'.format(ll.tail))
+    print('head_node', ll.prepend("F"))
+    # print('length: {}'.format(ll.length()))
+    print('find: {}'.format(ll.find(lambda item: item == 'B')))
+    # print(ll.items())
+    # ll.append("J")
+    # ll.append("A")
+    # ll.append("B")
+    # ll.append("C")
+    # print(ll.items())
+    #
+    # # print('delete: {}'.format(ll.delete("J")))
+    # ll.replace("B", 2)
+    # print(ll.items())
 
     # Enable this after implementing delete methd
     delete_implemented = True

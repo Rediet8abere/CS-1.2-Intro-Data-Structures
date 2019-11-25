@@ -3,9 +3,8 @@ import markov
 import os
 
 
-# token = 'TOM and JERRY traversed the Gardens, and enjoyed themselves to the utmost extent in all the variety they afforded, till day-light had long given them the hint it was time to think of home. LOGIC, as upon former occasions, was not to be found; and the CORINTHIAN and his COZ were compelled to leave Vauxhall without him.'
-# token = list(token.split())
 app = Flask(__name__)
+
 @app.route('/')
 def tweet():
     sentence = markov.Markov()
