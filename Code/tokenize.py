@@ -1,13 +1,16 @@
-def token():
-    "Read words file"
-    file = open("Tom_and_Jerry.txt")
-    content = file.read()
-    # content = "Hello World, How are you doing. I hope you have a blessed day and night!"
-    word_token = list(content.split())
-    file.close()
-    return word_token
+# import cleanup
+
+def token(text):
+    """ Input: string that is clean text
+        Process: converts string to list of words
+        Output: List of words
+    """
+    print("Hello World")
+    word_list = list(text.split())
+    return word_list
 
 if __name__ == "__main__":
-    word_list = token()
-    print(word_list)
-    print(type(word_list))
+    # text = cleanup.clean_text()
+    token(text)
+    # word_list = token(text)
+    # print(word_list)

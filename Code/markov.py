@@ -1,64 +1,55 @@
 import dictogram
 import random
-# token = 'one fish two fish red fish blue fish'
-# source_text = '“Seven!” I answered. “Then, how do you know?”'
-# source_text = list(source_text.split())
-def markov_chains(token):
-    """ Takes a token as an argument and creates a markov chain
-        to generate a sentence.
-    """
-    word_dict = {}
-    word_list = []
-    # creates a Dictionary of list
-    for index in range(len(token)-1):
-        # loop through the list to check if token is in dict appends it to the list
-        # and create a Dictionary of list as the value and token as a key
-        # if not look for the key, get the value of the key which is a list and
-        # append the token to the list
-        if not any(token[index] in word_count for word_count in word_dict):
-            word_list.append(token[index+1])
-            word_dict[token[index]] = word_list
-        else:
-            if token[index] in word_dict.keys():
-                value = word_dict.get(token[index])
-                value.append(token[index+1])
+
+import cleanup
+import tokenize
+
+text = cleanup.clean_text()
+token = tokenize.token(text)
+
+class markov(object):
+    def __init__(self, token):
+        self.token = token
+        self.word_dict = {}
+
+    def dict_list(self):
+        """ Takes in token as a list to create a dictionary of types and
+        words that follows the types
+        """
         word_list = []
+        for index in range(len(self.token)-1):
+            if self.token[index] not in self.word_dict:
+                word_list.append(self.token[index+1])  # Appends words that follow the types
+                self.word_dict[self.token[index]] = word_list  # Create a dictionary based on types and it's word list
+            else:
+                if self.token[index] in self.word_dict.keys():
+                    value = self.word_dict.get(self.token[index]) # gets the list if the type already exists
+                    value.append(self.token[index+1]) # and append the new word to the list
+            word_list = []
 
-    capital_words = []
-    ending_words = []
-    for key, value in word_dict.items():
-        # calls dictogram on the list(value) inside
-        # the Dictionary to change it to a Dictionary
-        word_dict[key] = dictogram.Dictogram(value)
-        # sets capital words as the start word
-        # sets words that ends with ., !, ? as ending words
-        for letter in key:
-            if letter.isupper():
-                capital_words.append(key)
-        for letter in key:
-            if letter == '.':
-                ending_words.append(key)
-            if letter == '!':
-                ending_words.append(key)
-            if letter == '?':
-                ending_words.append(key)
-    print("ending_words", ending_words)
-    print("capital_words", capital_words)
-    first_word = random.choice(capital_words)
-    print("first_word", first_word)
-    sentence = [first_word]
-    # generate a list of words based on the words weight
-    for i in range(5):
-        for key, value in word_dict.items():
-            if key == first_word:
-                next_word = value.sample()
-                sentence.append(next_word)
-                first_word = next_word
-    sentence.append(random.choice(ending_words))
+    def dictogram_dictlist(self):
+        """ Converts the list in word_dict to dictionary
+        by calling Dictogram on the values.
+        """
+        for key, value in self.word_dict.items():
+                self.word_dict[key] = dictogram.Dictogram(value)
 
-    print(sentence)
-    sentence = ' '.join(sentence)
-    print(sentence)
-    return sentence
+    def generate(self):
+        """ Generates a sentence based on sampled
+        random word choice
+        """
+        first_word = random.choice(list(self.word_dict.keys())) # first word for our sentence
+        first_word = first_word.capitalize()
+        sentence = [first_word]
+        for i in range(10):
+            val = random.choice(list(self.word_dict.values()))
+            next_word = val.sample()
+            sentence.append(next_word)
+        sentence = ' '.join(sentence)
+        return sentence + "."
+
 if __name__ == '__main__':
-    markov_chains(token)
+    markov = markov(token)
+    markov.dict_list()
+    markov.dictogram_dictlist()
+    print(markov.generate())

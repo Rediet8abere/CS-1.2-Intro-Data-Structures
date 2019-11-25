@@ -2,18 +2,22 @@
 # lower letters
 import re
 import string
-
 def clean_text():
+    """ Input: A text file
+        Process: Removes punctuation marks, text surrounded by digits and number
+                and, remaning punctuation from the above cleanup.
+        Output: clean text as a string
+    """
     file = open("Tom_and_Jerry.txt")
     content = file.read()
+    file.close()
     content = content.lower()
-    # looks for a punctuation mark and replaces them with nothing
     content = re.sub(r'[%s]' % re.escape(string.punctuation), '', content)
     content = re.sub(r'\w*\d\w*', '', content)
-    file.close()
+    content = re.sub(r'[''""...“”’‘]', '', content)
+    content = re.sub(r'\n', '', content)
     return content
 
-
 if __name__ == '__main__':
-    word_list = clean_text()
-    print(word_list)
+    text = clean_text()
+    print(text)
