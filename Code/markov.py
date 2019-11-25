@@ -1,15 +1,13 @@
 import dictogram
 import random
-
+import words_list
 import cleanup
-import tokenize
 
-text = cleanup.clean_text()
-token = tokenize.token(text)
 
-class markov(object):
-    def __init__(self, token):
-        self.token = token
+class Markov(object):
+    def __init__(self):
+        self.text = cleanup.clean_text()
+        self.token = words_list.token(self.text)
         self.word_dict = {}
 
     def dict_list(self):
@@ -49,7 +47,7 @@ class markov(object):
         return sentence + "."
 
 if __name__ == '__main__':
-    markov = markov(token)
+    markov = Markov()
     markov.dict_list()
     markov.dictogram_dictlist()
     print(markov.generate())

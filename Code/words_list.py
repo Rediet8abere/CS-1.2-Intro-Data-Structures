@@ -5,7 +5,6 @@ def token(text):
         Process: converts string to list of words
         Output: List of words
     """
-    print("Hello World")
     word_list = list(text.split())
     return word_list
 
