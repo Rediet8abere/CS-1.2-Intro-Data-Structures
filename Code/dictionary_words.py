@@ -20,16 +20,15 @@ def random_words(word_num=1):
         random_words.append(words[random_index].strip('\n'))
     sentence = ' '.join(random_words)
 
-    print(sentence)
+    # print(sentence)
     return sentence
 
 
 if __name__ == "__main__":
-    # open the file here.
     params = sys.argv[1:]
     if params:
         word_num = params[0]
-        random_words(word_num)
+        print(random_words(word_num))
     else:
         print("Please pass in a number in the command line. A defualt word is generated.")
-        random_words()
+        print(random_words())

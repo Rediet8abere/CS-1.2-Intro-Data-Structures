@@ -151,45 +151,73 @@ class LinkedList(object):
         return prev
 
     def replace(self, item, sub):
-        """Add a new replace method to your LinkedList class that deletes an
-        existing item and replaces it with a new item, without creating a new node."""
+        """Deletes an existing item and replaces it with a new item,
+        without creating a new node."""
         cur_node = self.head
         while cur_node.data != item:
-            print(cur_node.data)
             cur_node = cur_node.next
         cur_node.data = sub
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        cur_node = self.head
+        while cur_node != None:
+            print("howdy")
+            cur_node = cur_node.next
+        raise StopIteration
+
+        return cur_node
+
+    def iterable(self):
+        print("In Here")
+        print("self", self)
+        print(dir(self.items()))
+        print(iter(self.items()))
+        self = iter(self)
+        print(iter(self))
+
 
 
 def test_linked_list():
     ll = LinkedList()
-    print('list: {}'.format(ll))
 
-    print('\nTesting append:')
-    for item in ['A', 'B', 'C', 'D', 1]:
-        print('append({!r})'.format(item))
-        ll.append(item)
-        print('list: {}'.format(ll))
-    # print('delete: {}'.format(ll.delete("D")))
-    print(ll.items())
-
-    print('head: {}'.format(ll.head))
-    print('tail: {}'.format(ll.tail))
-    print('head_node', ll.prepend("F"))
-    # print('length: {}'.format(ll.length()))
-    print('find: {}'.format(ll.find(lambda item: item == 'B')))
-    # print(ll.items())
-    # ll.append("J")
-    # ll.append("A")
-    # ll.append("B")
-    # ll.append("C")
+    # print('\nTesting append:')
+    # for item in ['A', 'B', 'C', 'D', 1]:
+    #     print('append({!r})'.format(item))
+    #     ll.append(item)
+    #     print('list: {}'.format(ll))
+    # # print('delete: {}'.format(ll.delete("D")))
     # print(ll.items())
     #
-    # # print('delete: {}'.format(ll.delete("J")))
-    # ll.replace("B", 2)
-    # print(ll.items())
+    # print('head: {}'.format(ll.head))
+    # print('tail: {}'.format(ll.tail))
+    # print('head_node', ll.prepend("F"))
+    # # print('length: {}'.format(ll.length()))
+    # print('find: {}'.format(ll.find(lambda item: item == 'B')))
+    print(ll.items())
+    ll.append("J")
+    ll.append("A")
+    ll.append("B")
+    ll.append("C")
+
+    print(next(ll))
+
+    for memeber in ll:
+        print("hello", memeber.data)
+
+    print('list: {}'.format(ll))
+
+    print(ll.items())
+    # print(ll.iterable())
+
+    # print('delete: {}'.format(ll.delete("J")))
+    ll.replace("B", 2)
+    print(ll.items())
 
     # Enable this after implementing delete methd
-    delete_implemented = True
+    delete_implemented = False
     if delete_implemented:
         print('\nTesting delete:')
         for item in ['B', 'C', 'A']:
