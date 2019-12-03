@@ -23,12 +23,11 @@ class Dictogram(dict):
         """Increase frequency count of given word by given count amount."""
         # Increase word frequency by count
         self.tokens += count
-
-        # if not any(word in word_count for word_count in self):
-        if word not in self:
+        if not any(word in word_count for word_count in self):
             self[word] = count
             self.types += 1
-        self[word] += count
+        else:
+            self[word] += count
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
@@ -44,13 +43,15 @@ class Dictogram(dict):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
         # Randomly choose a word based on its frequency in this histogram
-        token = sum(self.values())
+        # token = sum(self.values())
+        # print(self)
 
-        rand_int = random.randint(1, token)
+        rand_int = random.randint(1, self.tokens)
         for key, value in self.items():
+            # print("self.items()", self.items())
             word_dist = value
             if rand_int <= word_dist:
-                    return key
+                return key
             rand_int-=word_dist
 
         print()
@@ -63,13 +64,16 @@ def print_histogram(word_list):
     histogram = Dictogram(word_list)
     print('dictogram: {}'.format(histogram))
     print('{} tokens, {} types'.format(histogram.tokens, histogram.types))
-    # freq = histogram.frequency("word")
+    freq = histogram.frequency("word")
     # print("freq", freq)
     for word in word_list[-2:]:
         freq = histogram.frequency(word)
         print('{!r} occurs {} times'.format(word, freq))
     print()
-    # print("sample", histogram.sample())
+    samples=[]
+    for i in range(10):
+        samples.append(histogram.sample())
+    print("sample in here", samples)
     print_histogram_samples(histogram)
 
 

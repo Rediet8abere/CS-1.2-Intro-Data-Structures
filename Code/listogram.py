@@ -55,10 +55,7 @@ class Listogram(list):
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
-        token = 0
-        for item in self:
-            token += item[1]
-        rand_int = random.randint(1, token)
+        rand_int = random.randint(1, self.tokens)
 
         for i in range(len(self)):
             word_dist = self[i][1]
