@@ -1,8 +1,1 @@
-one
-fish
-two
-fish
-red
-fish
-blue
-fish
+Tom loves riding bike. Jerry likes flying, one day jerry was flying over tom when he was riding a bike.

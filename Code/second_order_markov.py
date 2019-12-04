@@ -32,9 +32,7 @@ class Markov(object):
         by calling Dictogram on the values.
         """
         for key, value in self.word_dict.items():
-            # if self.word_dict.get(key) is not None:
-            print(self.word_dict.get(key))
-            self.word_dict[key] = dictogram.Dictogram(value)
+                self.word_dict[key] = dictogram.Dictogram(value)
 
     def generate(self):
         """ Generates a sentence based on sampled

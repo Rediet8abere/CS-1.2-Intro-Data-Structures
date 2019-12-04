@@ -29,6 +29,12 @@ class Dictogram(dict):
         else:
             self[word] += count
 
+        # if not any(word in word_count for word_count in self):
+        # if word not in self:
+        #     self[word] = count
+        #     self.types += 1
+        # self[word] += count
+
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # Retrieve word frequency count
@@ -48,7 +54,6 @@ class Dictogram(dict):
 
         rand_int = random.randint(1, self.tokens)
         for key, value in self.items():
-            # print("self.items()", self.items())
             word_dist = value
             if rand_int <= word_dist:
                 return key
@@ -121,15 +126,15 @@ def main():
         print_histogram(arguments)
     else:
         # Test histogram on letters in a word
-        word = 'abracadabra'
-        print_histogram(list(word))
+        # word = 'abracadabra'
+        # print_histogram(list(word))
         # Test histogram on words in a classic book title
         fish_text = 'one fish two fish red fish blue fish'
         print_histogram(fish_text.split())
         # Test histogram on words in a long repetitive sentence
-        woodchuck_text = ('how much wood would a wood chuck chuck'
-                          ' if a wood chuck could chuck wood')
-        print_histogram(woodchuck_text.split())
+        # woodchuck_text = ('how much wood would a wood chuck chuck'
+        #                   ' if a wood chuck could chuck wood')
+        # print_histogram(woodchuck_text.split())
 
 if __name__ == '__main__':
     main()

@@ -28,7 +28,7 @@ class HashTable(object):
     def keys(self):
         """Return a list of all keys in this hash table.
         TODO: Running time: O(n^2)we have to loop through
-        list of linked list n times to access the linkedlist
+        list of linked list n times to access the linkedlist,
         and n times to access the keys."""
         # Collect all keys in each bucket
         all_keys = []
@@ -40,7 +40,7 @@ class HashTable(object):
     def values(self):
         """Return a list of all values in this hash table.
         Running time: O(n^2) we have to loop through
-        list of linked list n times to access the linkedlist
+        list of linked list n times to access the linkedlist,
         and n times to access the values.
         """
         # Loop through all buckets
@@ -53,12 +53,12 @@ class HashTable(object):
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
-        Running time: O(n) we have to loop through the list of linked
+        Running time: O(n) bestcase and average case we have to loop through the list of linked
         list to get linked list """
         # Collect all pairs of key-value entries in each bucket
         all_items = []
         for bucket in self.buckets:
-            all_items.extend(bucket.items())
+            all_items.extend(bucket.items()) # puts the linked list in the same list
         return all_items
 
     def length(self):
@@ -69,83 +69,92 @@ class HashTable(object):
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        Running time: O(n^2) we have to loop through
-        list of linked list n times to access the linkedlist
-        and n times to access the key to compare to."""
+        Running time: bestcase - O(1) if item is on the first bucket and head_node;
+        average case - 0(n/b) after getting the bucket in 0(1) it looks through the
+        linkedlist."""
         # Find bucket where given key belongs
         # Check if key-value entry exists in bucket
-        for bucket in self.buckets:
-            for key_bucket, value in bucket.items():
-                if key_bucket == key:
-                    return True
+
+        index = self._bucket_index(key)
+        bucket = self.buckets[index]
+
+        for key_bucket, value in bucket.items():
+            if key_bucket == key:
+                return True
         return False
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        Running time: O(n^2) we have to loop through
-        list of linked list n times to access the linkedlist
-        and n times to access the key and value."""
+        Running time: bestcase - O(1) if item is on the first bucket and head_node;
+        average case - 0(n/b) after getting the bucket in 0(1) it looks through the
+        linkedlist."""
         # Find bucket where given key belongs
         # Check if key-value entry exists in bucket
         # If found, return value associated with given key
         # Otherwise, raise error to tell user get failed
         # raise KeyError('Key not found: {}'.format(key))
-        for bucket in self.buckets:
-            for key_bucket, value in bucket.items():
-                if key_bucket == key and value:
-                    return value
+        index = self._bucket_index(key)
+        bucket = self.buckets[index]
+        for key_bucket, value in bucket.items():
+            if key_bucket == key and value:
+                return value
             raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        Running time: O(n^2) we have to loop through
-        list of linked list n times to access the linkedlist
-        and n times to access the key to compare to."""
+        Running time: bestcase - O(1) if item is on the first bucket and head_node;
+        average case - 0(n/b) after getting the bucket in 0(1) it looks through the
+        linkedlist."""
         # Find bucket where given key belongs
         # Check if key-value entry exists in bucket
         # If found, update value associated with given key
         # Otherwise, insert given key-value entry into bucket
+        # print(key, value, self._bucket_index(key))
         self.count += 1
-        for bucket in self.buckets:
-            for key_bucket, value_bucket in bucket.items():
-                if key_bucket == key:
-                    self.delete(key_bucket)
-                    bucket.append((key, value))
-                    return
+        index = self._bucket_index(key)
+        bucket = self.buckets[index]
+
+        if bucket.is_empty():
             bucket.append((key, value))
             return
+        self.delete(key)
+        bucket.append((key, value))
+        return
+
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        Running time: O(n^2) we have to loop through
-        list of linked list n times to access the linkedlist
-        and n times to access the key and value."""
+        Running time: bestcase - O(1) if item is on the first bucket and head_node;
+        average case - 0(n/b) after getting the bucket in 0(1) it looks through the
+        linkedlist."""
         # Find bucket where given key belongs
         # Check if key-value entry exists in bucket
         # If found, delete entry associated with given key
         # Otherwise, raise error to tell user delete failed
         # raise KeyError('Key not found: {}'.format(key))
+        index = self._bucket_index(key)
+        bucket = self.buckets[index]
         self.count -= 1
-        for bucket in self.buckets:
-            for key_bucket, value in bucket.items():
-                if key_bucket == key and value:
-                    bucket.delete((key_bucket, value))
-                    return
+        for key_bucket, value in bucket.items():
+            if key_bucket == key and value:
+                bucket.delete((key_bucket, value))
+                print("self.buckets in delete", self.buckets)
+                return
 
         raise KeyError('Key not found: {}'.format(key))
 
 
 def test_hash_table():
     ht = HashTable()
-    ht.keys()
     print('hash table: {}'.format(ht))
 
     print('\nTesting set:')
     for key, value in [('I', 1), ('V', 4), ('X', 9)]:
         print('set({!r}, {!r})'.format(key, value))
         ht.set(key, value)
+        print("hash code", ht._bucket_index(key))
         print('hash table: {}'.format(ht))
-
+    #
     print('\nTesting get:')
     for key in ['I', 'V', 'X']:
         value = ht.get(key)
@@ -153,7 +162,7 @@ def test_hash_table():
 
     print('contains({!r}): {}'.format('X', ht.contains('X')))
     print('length: {}'.format(ht.length()))
-
+    #
     print("Testing set for updates")
     for key, value in [('V', 5), ('X', 10)]:
         print('set({!r}, {!r})'.format(key, value))
@@ -163,6 +172,7 @@ def test_hash_table():
     for key in ['I', 'V']:
         value = ht.get(key)
         print('get({!r}): {!r}'.format(key, value))
+    print("items: ", ht.items())
 
     # Enable this after implementing delete method
     delete_implemented = True

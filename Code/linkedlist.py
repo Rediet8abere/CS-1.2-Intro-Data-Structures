@@ -108,8 +108,10 @@ class LinkedList(object):
 
         q  = quality
         cur = self.head
+        print("cur", cur)
         # Loop through all nodes until we find item where quality(item) is True
         while cur is not None:
+            print("cur.data", cur.data)
             if q(cur.data):
                 return cur.data
             cur = cur.next
