@@ -109,12 +109,11 @@ class HashTable(object):
         # Check if key-value entry exists in bucket
         # If found, update value associated with given key
         # Otherwise, insert given key-value entry into bucket
-        # print(key, value, self._bucket_index(key))
         self.count += 1
         index = self._bucket_index(key)
         bucket = self.buckets[index]
-
-        if bucket.is_empty():
+        print("printing bucket find: ", bucket.find(lambda item: (key, value)))
+        if bucket.find(lambda item: (key, value)) is None:
             bucket.append((key, value))
             return
         self.delete(key)
@@ -154,6 +153,13 @@ def test_hash_table():
         ht.set(key, value)
         print("hash code", ht._bucket_index(key))
         print('hash table: {}'.format(ht))
+
+    print('\nTesting set:')
+    for key, value in [('Mia', 1), ('Sue', 4)]:
+        print('set({!r}, {!r})'.format(key, value))
+        ht.set(key, value)
+        print("hash code>>>>>>>>>>>>>>>>>>>>>>>>.", ht._bucket_index(key))
+        print('hash table>>>>>>>>>>>>>>>>>>>>>>>>: {}'.format(ht))
     #
     print('\nTesting get:')
     for key in ['I', 'V', 'X']:

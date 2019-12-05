@@ -105,13 +105,13 @@ class LinkedList(object):
         O(n)
         TODO: Worst case running time: O(n) traversing though the LinkedList is required
         in order to look for the item within the lambda function."""
+        # lambda item: item == 'B'
 
-        q  = quality
+        q = quality
         cur = self.head
         print("cur", cur)
         # Loop through all nodes until we find item where quality(item) is True
         while cur is not None:
-            print("cur.data", cur.data)
             if q(cur.data):
                 return cur.data
             cur = cur.next
@@ -197,7 +197,7 @@ def test_linked_list():
     # print('tail: {}'.format(ll.tail))
     # print('head_node', ll.prepend("F"))
     # # print('length: {}'.format(ll.length()))
-    # print('find: {}'.format(ll.find(lambda item: item == 'B')))
+    print('find: {}'.format(ll.find(lambda item: item == 'B')))
     print(ll.items())
     ll.append("J")
     ll.append("A")
