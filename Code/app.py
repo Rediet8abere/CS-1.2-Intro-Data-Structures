@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, request
 import markov
 import os
 
@@ -12,6 +12,7 @@ def tweet():
     sentence.dictogram_dictlist()
     sentence = sentence.generate()
     return render_template('index.html', sentence=sentence)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))

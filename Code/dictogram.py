@@ -26,9 +26,11 @@ class Dictogram(dict):
         if not any(word in word_count for word_count in self):
             self[word] = count
             self.types += 1
+        elif word not in self:
+            self[word] = count
+            self.types += 1
         else:
             self[word] += count
-
         # if not any(word in word_count for word_count in self):
         # if word not in self:
         #     self[word] = count

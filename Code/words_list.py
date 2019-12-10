@@ -1,4 +1,4 @@
-# import cleanup
+import cleanup
 
 def token(text):
     """ Input: string that is clean text
@@ -9,7 +9,7 @@ def token(text):
     return word_list
 
 if __name__ == "__main__":
-    # text = cleanup.clean_text()
+    text = cleanup.clean_text()
     token(text)
-    # word_list = token(text)
+    word_list = token(text)
     # print(word_list)

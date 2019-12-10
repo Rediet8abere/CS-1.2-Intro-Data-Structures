@@ -3,7 +3,6 @@ import random
 import words_list
 import cleanup
 
-# Comedy Central
 
 class Markov(object):
     """ Generates sentence based on word distribution
@@ -12,6 +11,28 @@ class Markov(object):
         self.text = cleanup.clean_text()
         self.token = words_list.token(self.text)
         self.word_dict = {}
+
+    def two_words(self):
+        words = []
+        print(self.text)
+        for index in range(len(self.token)-2):
+            words.append((self.token[index], self.token[index+1], self.token[index+2]))
+
+        print("print(words)", words)
+        word_list = []
+        for index in range(len(words)-1):
+            if words[index] not in self.word_dict:
+                word_list.append(self.token[index+3])  # Appends words that follow the types
+                self.word_dict[words[index]] = word_list  # Create a dictionary based on types and it's word list
+            else:
+                if words[index] in self.word_dict.keys():
+                    value = self.word_dict.get(self.token[index]) # gets the list if the type already exists
+                    value.append(self.token[index+3]) # and append the new word to the list
+            word_list = []
+
+        print()
+
+        print("self.word_dict", self.word_dict)
 
     def dict_list(self):
         """ Takes in token as a list to create a dictionary of types and
@@ -27,37 +48,38 @@ class Markov(object):
                     value = self.word_dict.get(self.token[index]) # gets the list if the type already exists
                     value.append(self.token[index+1]) # and append the new word to the list
             word_list = []
+        # print("self.word_dict", self.word_dict)
 
     def dictogram_dictlist(self):
         """ Converts the list in word_dict to dictionary
         by calling Dictogram on the values.
         """
         for key, value in self.word_dict.items():
-            # if self.word_dict.get(key) is not None:
-            # print(self.word_dict.get(key))
             self.word_dict[key] = dictogram.Dictogram(value)
+        print("self.word_dict", self.word_dict)
 
-    def generate(self, count=15):
+    def generate(self):
         """ Generates a sentence based on sampled
         random word choice
         """
         first_word = random.choice(list(self.word_dict.keys())) # first word for our sentence
-        # first_word = first_word.capitalize()
-        sentence = []
-        print("first_word", first_word)
-        # print("self.word_dict", self.word_dict)
-        for i in range(count):
-            # print("self.word_dict[first_word]", self.word_dict[first_word])
-            second_word = self.word_dict[first_word]
-            # print("second_word", second_word)
-            next_word = second_word.sample()
-            first_word = next_word
+        first_word = first_word[random.randint(0, 1)].capitalize()
+        sentence = [first_word]
+        print("self.token", self.token)
+        print(len(self.token))
+        print("values", list(self.word_dict.values()))
+        for i in range(len(self.token)-2):
+            val = list(self.word_dict.values())[i]
+            print(len(val))
+            print("val", val)
+            next_word = val.sample()
             sentence.append(next_word)
         sentence = ' '.join(sentence)
         return sentence + "."
 
 if __name__ == '__main__':
     markov = Markov()
-    markov.dict_list()
+    markov.two_words()
+    # markov.dict_list()
     markov.dictogram_dictlist()
-    print(markov.generate())
+    # print(markov.generate())

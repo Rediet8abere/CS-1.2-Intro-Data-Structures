@@ -29,14 +29,29 @@
     </div>
 
     <!-- Card -->
-    <div class="card" style="width: 18rem;">
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="static/img/tom_and_jerry.jpg" class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">{{ sentence }}</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <a href="/" class="btn btn-primary">Generate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="card" style="width: 18rem;">
       <img src="static/img/tom_and_jerry.jpg" class="card-img-top" alt="fish" height="100" width="1000">
       <div class="card-body">
         <h5 class="card-title"><i class="fas fa-hat-wizard"></i> Tom and Jerry </h5>
         <p class="card-text">{{ sentence }}</p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
-    </div>
+    </div> -->
 
 </body>
 </html>

@@ -8,7 +8,8 @@ def clean_text():
                 and, remaning punctuation from the above cleanup.
         Output: clean text as a string
     """
-    file = open("test.txt")
+    # file = open("test.txt")
+    file = open("hasan.txt")
     content = file.read()
     file.close()
     content = content.lower()

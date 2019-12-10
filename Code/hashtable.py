@@ -96,9 +96,9 @@ class HashTable(object):
         index = self._bucket_index(key)
         bucket = self.buckets[index]
         for key_bucket, value in bucket.items():
-            if key_bucket == key and value:
+            if key_bucket == key:
                 return value
-            raise KeyError('Key not found: {}'.format(key))
+        raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
@@ -133,10 +133,11 @@ class HashTable(object):
         # raise KeyError('Key not found: {}'.format(key))
         index = self._bucket_index(key)
         bucket = self.buckets[index]
-        self.count -= 1
+
         for key_bucket, value in bucket.items():
-            if key_bucket == key and value:
+            if key_bucket == key:
                 bucket.delete((key_bucket, value))
+                self.count -= 1
                 print("self.buckets in delete", self.buckets)
                 return
 
