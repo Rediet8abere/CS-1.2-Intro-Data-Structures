@@ -44,15 +44,20 @@ class Markov(object):
         first_word = random.choice(list(self.word_dict.keys())) # first word for our sentence
         # first_word = first_word.capitalize()
         sentence = []
+        print(self.word_dict)
         print("first_word", first_word)
-        # print("self.word_dict", self.word_dict)
         for i in range(count):
-            # print("self.word_dict[first_word]", self.word_dict[first_word])
             second_word = self.word_dict[first_word]
-            # print("second_word", second_word)
             next_word = second_word.sample()
             first_word = next_word
             sentence.append(next_word)
+        # check for keys that has only 1 key value pair and collect them as a candidate for end word
+        end_words = []
+        for index in range(len(self.token)-1):
+            if len(self.word_dict[self.token[index]]) == 1:
+                end_words.append(self.token[index])
+        last_word = random.choice(end_words)
+        sentence.append(last_word)
         sentence = ' '.join(sentence)
         return sentence + "."
 

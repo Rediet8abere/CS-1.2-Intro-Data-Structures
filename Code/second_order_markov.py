@@ -68,15 +68,18 @@ class Markov(object):
         """
 
         sentence = []
+        print("self.word_dict", self.word_dict)
         for i in range(count):
             first_tuple = random.choice(list(self.word_dict.keys())) # first word for our sentence
-            # print("self.word_dict[first_tuple]", self.word_dict[first_tuple])
+            first_word = random.choice(first_tuple)
+            sentence.append(first_word)
             second_word = self.word_dict[first_tuple]
             # print("second_word", second_word)
             next_word = second_word.sample()
             # print("next_word", next_word)
             # first_tuple = second_word
             sentence.append(next_word)
+        # end_tuple =
         sentence = ' '.join(sentence)
         return sentence + "."
         # for i in range(len(self.token)):
@@ -93,4 +96,4 @@ if __name__ == '__main__':
     markov.two_words()
     # markov.dict_list()
     markov.dictogram_dictlist()
-    print(markov.generate())
+    print(markov.generate(5))
