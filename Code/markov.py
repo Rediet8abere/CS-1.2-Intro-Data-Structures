@@ -37,7 +37,7 @@ class Markov(object):
             # print(self.word_dict.get(key))
             self.word_dict[key] = dictogram.Dictogram(value)
 
-    def generate(self, count=15):
+    def generate(self, count=30):
         """ Generates a sentence based on sampled
         random word choice
         """
@@ -59,6 +59,7 @@ class Markov(object):
         last_word = random.choice(end_words)
         sentence.append(last_word)
         sentence = ' '.join(sentence)
+        sentence = sentence.capitalize()
         return sentence + "."
 
 if __name__ == '__main__':
