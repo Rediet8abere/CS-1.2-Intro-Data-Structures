@@ -12,22 +12,9 @@ body {
   background-size: cover; */
   width: 1000px;
   height: 300px;
+  left: 4.5%;
 }
-/* .card {
-  margin-top:80px;
-} */
-/* .jumbotron{ */
-            /* margin-left:-10px;
-            margin-top:-10px; */
-            /* height:100%;
-            min-width:20%;
-            position:absolute;
-        }
-        .jumbotron img{
-            height:100%;
-            width:20%;
-            max-width:20%;
-        } */
+
 img {
   float: right;
   padding-top: -250px;
